@@ -31,6 +31,7 @@ class RecommendationsEngine():
         cleaned_most_popular = []
         for value, _ in most_popular:
             cleaned_most_popular.append(self.text_cleaner.correct_sentence(value))
+
         return cleaned_most_popular
 
     def show_brands(self, query: str, topn: int) -> np.ndarray:

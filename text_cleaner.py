@@ -6,4 +6,5 @@ class TextCleaner():
         self.checker = Speller(fast=True)
 
     def correct_sentence(self, sentence: str) -> str:
+        sentence = ' '.join(sentence.split())
         return self.checker(sentence)
