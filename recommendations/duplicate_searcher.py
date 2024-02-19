@@ -6,20 +6,29 @@ import faiss
 
 
 class Sent2Vec():
+    """Sentence vectorizer class (based on FastText)"""
+
     def __init__(self, tokenizer: Callable):
         self.model = FastText(vector_size=100)
         self.tokenizer = tokenizer
 
     def train(self, sentences: pd.Series):
+        """Train on custom dataset"""
+
         tokenized_sentences = sentences.apply(self.tokenizer)
         self.model.build_vocab(corpus_iterable=tokenized_sentences)
-        self.model.train(corpus_iterable=tokenized_sentences, total_examples=self.model.corpus_count,
+        self.model.train(corpus_iterable=tokenized_sentences,
+                         total_examples=self.model.corpus_count,
                          epochs=self.model.epochs)
 
     def __get_word_embedding(self, word: str) -> np.ndarray:
+        """Word2Vec logic"""
+
         return self.model.wv[word]
 
     def get_sentence_embedding(self, sentence: str) -> np.ndarray:
+        """Sentence2Vec logic"""
+
         tokens = self.tokenizer(sentence)
         sentence_embedding = np.zeros(self.model.vector_size)
 
@@ -30,10 +39,14 @@ class Sent2Vec():
 
 
 class DuplicateSearcher():
+    """Class for removing duplicates and synonymous sentences"""
+
     def __init__(self, tokenizer: Callable):
         self.vectorizer = Sent2Vec(tokenizer)
 
     def __vectorize_corpus(self, sentences: pd.Series) -> (faiss.IndexFlatL2, np.ndarray):
+        """Get vector embeddings for each sentence"""
+
         vectorized_corpus = np.zeros((len(sentences), self.vectorizer.model.vector_size))
 
         for i in range(len(sentences)):
@@ -44,8 +57,12 @@ class DuplicateSearcher():
 
         return index, vectorized_corpus
 
-    def replace_duplicates_by_original(self, corpus: pd.DataFrame, vocab_row: str,
-                                       occurrences_row: str, similarity_threshold: float = 0.85) -> pd.DataFrame:
+    def replace_duplicates_by_original(self, corpus: pd.DataFrame,
+                                       vocab_row: str,
+                                       occurrences_row: str,
+                                       similarity_threshold: float = 0.85) -> pd.DataFrame:
+        """Duplicate removing implementation"""
+
         corpus = corpus.drop_duplicates(vocab_row)
         corpus = corpus.sort_values(by=[occurrences_row, vocab_row], ascending=False).reset_index()
 
@@ -62,7 +79,8 @@ class DuplicateSearcher():
                 if corpus.loc[j, occurrences_row] == 0:
                     continue
                 if sim > similarity_threshold:
-                    corpus.loc[i, occurrences_row] = corpus.loc[i, occurrences_row] + corpus.loc[j, occurrences_row]
+                    corpus.loc[i, occurrences_row] = corpus.loc[i, occurrences_row] \
+                                                     + corpus.loc[j, occurrences_row]
                     corpus.loc[j, occurrences_row] = 0
 
                 else:

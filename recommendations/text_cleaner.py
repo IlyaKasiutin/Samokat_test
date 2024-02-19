@@ -2,6 +2,7 @@ from autocorrect import Speller
 
 
 class TextCleaner():
+    """Text correction class"""
     def __init__(self):
         self.checker = Speller(fast=True)
 
