@@ -1,8 +1,8 @@
-from gensim.models.fasttext import FastText
+from typing import Callable
 import pandas as pd
 import numpy as np
+from gensim.models.fasttext import FastText
 import faiss
-from typing import Callable
 
 
 class Sent2Vec():
