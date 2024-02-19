@@ -16,3 +16,7 @@
 
 ![image](https://github.com/IlyaKasiutin/Search_hints_test/assets/116337853/5b06ab21-0912-4e18-87bd-116e84120d98)
 ![image](https://github.com/IlyaKasiutin/Search_hints_test/assets/116337853/f87edd5a-fefb-4411-a62e-3b7db1844504)
+
+# Полный поиск
+Поиск и продолжений, и брендов тоже выполняется достаточно быстро (исключены повторяющиеся действия)
+![image](https://github.com/IlyaKasiutin/Search_hints_test/assets/116337853/4c378f11-4cce-4c1c-b9c0-8b6df0e335b8)
