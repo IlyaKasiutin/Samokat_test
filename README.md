@@ -8,13 +8,13 @@
 Как итог - данный подход обеспечивает вполне хорошую скорость выдачи запросов:
 
 ![image](https://github.com/IlyaKasiutin/Search_hints_test/assets/116337853/e0b7daf0-1f83-49ac-83a8-8f7f53f612db)
-![image](https://github.com/IlyaKasiutin/Search_hints_test/assets/116337853/3f739f73-67f6-466c-9cd8-a71229753271)
+![image](https://github.com/IlyaKasiutin/Search_hints_test/assets/116337853/4ede50c1-39a2-42ca-8925-9f6cc6da970e)
 
 # Поиск брендов
 Выбор наиболее релевантных товаров устроен следующим образом: для полученного топа продолжений фразы выбираются все товары, которые по этим фразам предлагались. Далее они сортируются сначала по релевантности, затем по популярности фразы.
 Скорость поиска представлена ниже:
 
-![image](https://github.com/IlyaKasiutin/Search_hints_test/assets/116337853/5b06ab21-0912-4e18-87bd-116e84120d98)
+![image](https://github.com/IlyaKasiutin/Search_hints_test/assets/116337853/9270574d-6d6f-4e9d-8032-1a9322222b53)
 ![image](https://github.com/IlyaKasiutin/Search_hints_test/assets/116337853/f87edd5a-fefb-4411-a62e-3b7db1844504)
 
 # Полный поиск
